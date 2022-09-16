@@ -8,11 +8,9 @@
     </head>
     <body>
         <?php
-            // if(isset($_SERVER['REMOTE_ADDR'])) {
-            //     $ip = $_SERVER['REMOTE_ADDR'];
-            // } else {
-                $ip= "49.36.232.208";
-            // }
+            // To get User IP
+            // $ip = $_SERVER['REMOTE_ADDR'];
+            $ip= "49.36.232.208";
             $ipData = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
             $countryName = $ipData->geoplugin_countryName;
             $countryCode = $ipData->geoplugin_countryCode; 
@@ -48,6 +46,7 @@
                         </tbody>
                     </table>
                 </div> 
+                <div id="newMsg"></div>
                 <button type="button" onclick="getWeather()" class="btn btn-primary mb-2">Click to get current weather data</button> 
                 <div class="col-lg-6">
                     <table class="table table-bordered">
@@ -100,7 +99,8 @@
                             data: response,
                             success: function(data) {
                                 console.log(data);
-                            }
+                                var newMsg = '<div id="newMsg"><p>'+data+'</p></div>';
+                                $('#newMsg').replaceWith(newMsg);}
                         });
                     }
                 });
