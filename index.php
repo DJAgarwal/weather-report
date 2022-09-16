@@ -8,9 +8,19 @@
     </head>
     <body>
         <?php
+            if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+                $link = "https";
+            } else { 
+                $link = "http"; 
+            }
+            $link .= "://";
+            $link .= $_SERVER['HTTP_HOST'];
+            $link .= $_SERVER['REQUEST_URI'];
+
             // To get User IP
             // $ip = $_SERVER['REMOTE_ADDR'];
             $ip= "49.36.232.208";
+            
             $ipData = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
             $countryName = $ipData->geoplugin_countryName;
             $countryCode = $ipData->geoplugin_countryCode; 
@@ -75,6 +85,7 @@
                 });
             }
             function getWeather() {
+                var siteUrl = "<?php echo $link; ?>"
                 $.ajax({
                     url: "https://api.openweathermap.org/data/2.5/weather?lat="+<?php echo $latitude ?>+"&lon="+<?php echo $longitude ?>+"&appid=9222e51f6344f4403b37658c814acdbf",
                     type: "POST",
@@ -95,7 +106,7 @@
                         $('#editWeather').replaceWith(newWeatherRow);
                         $.ajax({
                             type: "POST",
-                            url: "/weather-report/connect.php",
+                            url: siteUrl+"connect.php",
                             data: response,
                             success: function(data) {
                                 console.log(data);
