@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <button type="button" onclick="getUser()" class="btn btn-primary mb-2">Click to create random user</button>
+                <button type="button" onclick="getUser()" class="btn btn-primary mb-2">Create random user</button>
                 <div class="col-lg-6">
                     <table class="table table-bordered">
                         <thead>
@@ -52,12 +52,13 @@
                         </thead>
                         <tbody>
                             <tr id="edit">
-                            <tr>
+                            </tr>
                         </tbody>
                     </table>
                 </div> 
+                <a href="<?php $link ?>weather_details.php" type="button" class="btn btn-primary mb-2">Get all weather data</a> 
                 <div id="newMsg"></div>
-                <button type="button" onclick="getWeather()" class="btn btn-primary mb-2">Click to get current weather data</button> 
+                <button type="button" onclick="getWeather()" class="btn btn-primary mb-2">Get current weather data</button> 
                 <div class="col-lg-6">
                     <table class="table table-bordered">
                         <tbody id="editWeather"></tbody>
